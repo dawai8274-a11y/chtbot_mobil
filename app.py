@@ -18,21 +18,22 @@ st.set_page_config(
 )
 
 # =========================
-# CSS KUSTOM (Tema Pink Gradasi)
+# CSS KUSTOM (Tema Ungu + Chat Bar Putih, Teks Hitam)
 # =========================
 st.markdown("""
 <style>
 :root {
-    --primary-color: #ff5fa2;   /* Pink utama */
-    --secondary-color: #ff87c8; /* Pink muda */
-    --accent-color: #ffcae9;    /* Pink pastel */
-    --bg-dark: #1a0f18;         /* Background hitam-pink gelap */
-    --text-light: #ffe6f7;      /* Putih-pink halus */
-    --shadow: 0 0 35px rgba(255,105,180,0.45);
+    --primary-color: #7b2cbf;    /* Ungu utama */
+    --secondary-color: #9d4edd;  /* Ungu muda */
+    --accent-color: #c77dff;     /* Ungu pastel */
+    --bg-dark: #190b28;          /* Latar ungu gelap */
+    --text-light: #efe8ff;       /* Teks terang */
+    --shadow: 0 0 35px rgba(157, 78, 221, 0.40);
 }
 
+/* Latar belakang app */
 html, body, .stApp {
-    background: linear-gradient(145deg, #1a0f18, #2a0e2b, #20091f);
+    background: linear-gradient(145deg, #190b28, #240046, #3a0ca3);
     background-size: 300% 300%;
     animation: bgflow 12s ease infinite;
     color: var(--text-light);
@@ -49,7 +50,7 @@ html, body, .stApp {
     font-size: 2.4em;
     font-weight: 800;
     text-align: center;
-    background: linear-gradient(270deg, #ff5fa2, #ff87c8, #ffcae9);
+    background: linear-gradient(270deg, #c77dff, #9d4edd, #7b2cbf);
     background-size: 400% 400%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -64,14 +65,12 @@ html, body, .stApp {
 
 /* Sidebar */
 section[data-testid="stSidebar"] {
-    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-    border-right: 1px solid rgba(255,255,255,0.1);
+    background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+    border-right: 1px solid rgba(255,255,255,0.12);
 }
-section[data-testid="stSidebar"] * {
-    color: var(--text-light) !important;
-}
+section[data-testid="stSidebar"] * { color: var(--text-light) !important; }
 
-/* Kontainer chat */
+/* Kontainer chat (panel riwayat) */
 .chat-container {
     background: rgba(255,255,255,0.06);
     border-radius: 14px;
@@ -81,19 +80,18 @@ section[data-testid="stSidebar"] * {
 
 /* Bubble chat */
 .chat-bubble-user {
-    background: linear-gradient(135deg, #ff5fa2, #ff87c8);
+    background: linear-gradient(135deg, #9d4edd, #7b2cbf);
     color: white;
     border-radius: 18px 18px 0 18px;
     padding: 10px 15px;
     margin: 10px 0;
     max-width: 85%;
     word-wrap: break-word;
-    box-shadow: 0 0 12px rgba(255,105,180,0.4);
+    box-shadow: 0 0 12px rgba(157,78,221,0.35);
 }
-
 .chat-bubble-ai {
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.22);
     border-radius: 18px 18px 18px 0;
     padding: 10px 15px;
     margin: 10px 0;
@@ -101,26 +99,24 @@ section[data-testid="stSidebar"] * {
     word-wrap: break-word;
 }
 
-/* Tombol */
+/* Tombol umum */
 .stButton>button {
-    background: linear-gradient(135deg, #ff87c8, #ff5fa2);
+    background: linear-gradient(135deg, #c77dff, #7b2cbf);
     border: none !important;
     color: white !important;
     border-radius: 10px;
     padding: 8px 14px;
     font-weight: 600;
-    box-shadow: 0 0 12px rgba(255,105,180,0.5);
+    box-shadow: 0 0 12px rgba(157,78,221,0.45);
 }
 .stButton>button:hover {
-    background: linear-gradient(135deg, #ff5fa2, #ff87c8);
+    background: linear-gradient(135deg, #7b2cbf, #9d4edd);
     transform: scale(1.03);
     transition: 0.15s ease;
 }
 
-/* Input & select */
-.stSelectbox, .stNumberInput, .stTextInput, .stSlider {
-    color: var(--text-light) !important;
-}
+/* Input umum */
+.stSelectbox, .stNumberInput, .stTextInput, .stSlider { color: var(--text-light) !important; }
 div[data-baseweb="select"] > div {
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.2);
@@ -131,9 +127,9 @@ input, textarea {
     border: 1px solid rgba(255,255,255,0.2) !important;
 }
 
-/* Card dataframe */
+/* Dataframe card */
 [data-testid="stDataFrame"] {
-    background: rgba(255,255,255,0.04);
+    background: rgba(255,255,255,0.05);
     border-radius: 12px;
     border: 1px solid rgba(255,255,255,0.12);
     box-shadow: var(--shadow);
@@ -141,12 +137,22 @@ input, textarea {
 }
 
 /* Divider & caption */
-hr, .stDivider {
-    border-color: rgba(255,255,255,0.15) !important;
+hr, .stDivider { border-color: rgba(255,255,255,0.15) !important; }
+.stCaption { color: var(--text-light) !important; }
+
+/* ====== CHAT INPUT BAR PUTIH, TEKS HITAM ====== */
+div[data-testid="stChatInput"] {
+    background: #ffffff !important;
+    border-top: 1px solid rgba(0,0,0,0.12) !important;
 }
-.css-zt5igj, .stCaption, .st-emotion-cache-10trblm {
-    color: var(--text-light) !important;
+div[data-testid="stChatInput"] textarea,
+div[data-testid="stChatInput"] [contenteditable="true"] {
+    background: #ffffff !important;
+    color: #111111 !important;
+    border: 1px solid rgba(0,0,0,0.18) !important;
 }
+div[data-testid="stChatInput"] textarea::placeholder { color: #444 !important; }
+/* tombol send tetap boleh tampil; biarkan default */
 </style>
 """, unsafe_allow_html=True)
 
@@ -196,7 +202,8 @@ def save_to_dataset(input_df: pd.DataFrame, prediction: float, path: str):
 # =========================
 # KONFIG GEMINI (ENV FIRST)
 # =========================
-gemini_api_key_env = os.environ.get("GEMINI_API_KEY", "AIzaSyBdhM3P0vUzmQjTBkbaKXbXpyvzIxbcrOY")
+# (Keamanan) ambil dari environment/secret; jangan hardcode API key
+gemini_api_key_env = os.environ.get("GEMINI_API_KEY", "AIzaSyBaYKVwzeEXFQUEcHh_ieT6J15uHwyz8gE")
 try:
     import google.generativeai as genai
     HAVE_GENAI = True
@@ -226,7 +233,6 @@ def _get_gemini_client(api_key: str):
         return None
 
 def _active_api_key() -> str:
-    # manual_key didefinisikan di dalam sidebar; gunakan state jika perlu
     return gemini_api_key_env or st.session_state.get("manual_key", "") or (manual_key if 'manual_key' in locals() else "")
 
 def _dataset_summary(df: pd.DataFrame, max_models: int = 20) -> str:
@@ -265,7 +271,6 @@ def gemini_chat(
     if client is None:
         return "⚠ Gagal menginisialisasi klien Gemini. Periksa API key atau koneksi."
 
-    # Siapkan konteks
     ds_ctx = _dataset_summary(df)
     last_ctx = ""
     if last_prediction is not None and last_input:
@@ -305,10 +310,7 @@ RIWAYAT CHAT (ringkas):
         prompt = f"{system_prompt}\n\nPERTANYAAN PENGGUNA:\n{user_message}\n"
         resp = client.generate_content(
             prompt,
-            generation_config={
-                "temperature": temperature,
-                "max_output_tokens": max_output_tokens
-            },
+            generation_config={"temperature": temperature, "max_output_tokens": max_output_tokens},
         )
         text = (getattr(resp, "text", None) or "").strip()
         return text or "Maaf, aku tidak menerima teks balasan dari Gemini."
@@ -445,7 +447,6 @@ with left:
         X = prepare_input(inputs, example_schema)
         try:
             pred = model.predict(X)
-            # pastikan dapat angka float untuk single output
             price = float(pred[0]) if isinstance(pred, (list, np.ndarray, pd.Series)) else float(pred)
             harga_rupiah = price * 20000
             save_to_dataset(X, price, DATASET_PATH)
@@ -471,14 +472,13 @@ with left:
 
 with right:
     st.subheader("💬 Chat Asisten (Gemini-first)")
-    # kontrol chat
     c1, c2, c3 = st.columns(3)
     with c1:
         if st.button("🔄 Reset Chat"):
             st.session_state["chat_history"] = []
             st.toast("Chat direset.")
     with c2:
-        st.caption("Tips: tanya apa saja. Aku akan jawab pakai Gemini.")
+        st.caption("Tips: tanya apa saja. Tekan Enter untuk mengirim.")
     with c3:
         mode_label = "Gemini-first ✅" if answer_all else "Fallback Lokal"
         st.caption(mode_label)
@@ -486,33 +486,34 @@ with right:
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = []
 
+    # Riwayat chat (bubble)
     st.markdown("<div class='chat-container'>", unsafe_allow_html=True)
     for role, msg in st.session_state.chat_history:
         bubble = "chat-bubble-user" if role == "user" else "chat-bubble-ai"
         st.markdown(f"<div class='{bubble}'>{msg}</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
-    user_msg = st.text_input("Ketik pertanyaan di sini...")
-    if st.button("Kirim 💬"):
-        if user_msg.strip():
-            st.session_state.chat_history.append(("user", user_msg))
-            if answer_all:
-                response = gemini_chat(
-                    user_msg,
-                    history=st.session_state.get("chat_history"),
-                    df=df,
-                    last_prediction=st.session_state.get("last_prediction"),
-                    last_input=st.session_state.get("last_input"),
-                )
-            else:
-                response = local_chat_response(
-                    user_msg,
-                    st.session_state.get("last_prediction"),
-                    st.session_state.get("last_input"),
-                    df
-                )
-            st.session_state.chat_history.append(("assistant", response))
-            st.rerun()
+    # ===== Kirim cukup tekan Enter (st.chat_input) =====
+    user_msg = st.chat_input("Ketik pertanyaan di sini…")
+    if user_msg:
+        st.session_state.chat_history.append(("user", user_msg))
+        if answer_all:
+            response = gemini_chat(
+                user_msg,
+                history=st.session_state.get("chat_history"),
+                df=df,
+                last_prediction=st.session_state.get("last_prediction"),
+                last_input=st.session_state.get("last_input"),
+            )
+        else:
+            response = local_chat_response(
+                user_msg,
+                st.session_state.get("last_prediction"),
+                st.session_state.get("last_input"),
+                df
+            )
+        st.session_state.chat_history.append(("assistant", response))
+        st.rerun()
 
 st.markdown("---")
-st.caption("✨ Aplikasi prediksi harga mobil + chat Gemini AI — tema PINK gradasi ✨")
+st.caption("✨ Aplikasi prediksi harga mobil + chat Gemini AI — tema UNGU, chat bar putih, Enter untuk kirim ✨")
